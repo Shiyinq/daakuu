@@ -9,7 +9,7 @@ const {
 	allTimePopulerAnime,
 	top50Anime,
 	topMovies
-} = require('./daaku/features')
+} = require('./daakuu/features')
 
 
 bot.start((ctx) => {
