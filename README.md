@@ -1,2 +1,2 @@
-# DaAKu
-Daftar Anime Ku
+# DaAKuu
+Daftar Anime Kuu
