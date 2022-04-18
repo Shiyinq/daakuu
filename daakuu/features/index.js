@@ -1,3 +1,4 @@
+const { getCurrentDate, getNextSeason } = require('../utils')
 const { anilist, anilistAnime, anilistAnimeDesc } = require('../anilist')
 
 function trendingAnime(ctx, page=0) {
@@ -13,13 +14,14 @@ function trendingAnime(ctx, page=0) {
 }
 
 function popularAnime(ctx, page=0) {
-	let title = `📎 ANIME - POPULAR THIS SEASON 📈\n\n`
+	let { year, season } = getCurrentDate()
+	let title = `📎 ANIME - POPULAR THIS SEASON - (${season} ${year})📈\n\n`
 	let variables = {
 		"page": page,
 		"perPage": 10,
 		"type": "ANIME",
-		"seasonYear": 2022, 
-		"season": "SPRING",
+		"seasonYear": year, 
+		"season": season,
 		"sort": ["POPULARITY_DESC"]
 	}
 
@@ -27,13 +29,15 @@ function popularAnime(ctx, page=0) {
 }
 
 function upcomingAnime(ctx, page=0) {
-	let title = `📎 ANIME - UPCOMING NEXT SEASON 📈\n\n`
+	let { year, season } = getCurrentDate()
+	season = getNextSeason(season, 1)
+	let title = `📎 ANIME - UPCOMING NEXT SEASON - (${season} ${year})📈\n\n`
 	let variables = {
 		"page": page,
 		"perPage": 10,
 		"type": "ANIME",
-		"seasonYear": 2022, 
-		"season": "SUMMER",
+		"seasonYear": year, 
+		"season": season,
 		"sort": ["POPULARITY_DESC"]
 	}
 
