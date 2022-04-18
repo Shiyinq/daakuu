@@ -8,7 +8,9 @@ const {
 	upcomingAnime,
 	allTimePopulerAnime,
 	top50Anime,
-	topMovies
+	topMovies,
+	detailAnime,
+	closeAnimeDetail
 } = require('./daakuu/features')
 
 
@@ -53,7 +55,6 @@ bot.on('callback_query', (ctx) => {
 	let dataQuery = ctx.callbackQuery.data
 	let [callFunction, page] = dataQuery.split('-')
 
-	console.log(`${callFunction} goToPage: ${page}`)
 	eval(callFunction)(ctx, page)
 })
 

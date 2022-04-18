@@ -6,9 +6,7 @@ function anilist(ctx, title, variables, paging) {
 	let { page, type } = variables
 
 	api(query, variables)
-		.then(data => {
-			let {Page: {pageInfo, media} } = data
-			let {currentPage, perPage, hasNextPage} = pageInfo
+		.then(( {Page: {pageInfo: {currentPage, perPage, hasNextPage}, media} }) => {
 
 			let anilists = title
 			let buttonDetailInfo = [ [], [], [] ]
@@ -17,8 +15,11 @@ function anilist(ctx, title, variables, paging) {
 				let number = i + 1 
 				let listNumber = page == 1 || page == 0 ? i + 1 : ((page - 1) * perPage) + (i + 1)
 				
-				let template = Markup.button.callback(`${listNumber}`, `detail-${m.id}`)
-				anilists += `${listNumber}. ${m.title.romaji}\n`
+				type = type.toLowerCase()
+				type = type.charAt(0).toUpperCase() + type.slice(1)
+
+				let template = Markup.button.callback(`${listNumber}`, `detail${type}-${m.id}`)
+				anilists += `${listNumber}. ${m.title.romaji} ${m.score ? 'Score: ' + m.meanScore + '%' : ''}\n`
 
 				if(number <= 5) {
 					buttonDetailInfo[0].push(template)
@@ -49,6 +50,48 @@ function anilist(ctx, title, variables, paging) {
 		})
 }
 
+function anilistAnime(ctx, variables) {
+	api(query, variables)
+		.then(( { Page: { media } }) => {
+			let [{
+				id,
+				title: { romaji }, 
+				coverImage: { extraLarge }, 
+				format,
+				episodes,
+				duration,
+				status,
+				startDate: {year, month, day}, 
+				season,
+				meanScore,
+				studios: { nodes: [{ name }] }, 
+				source,
+				genres,
+				siteUrl
+			}] = media
+
+			let anime = `
+			📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : '-'}\nDuration: ${duration ? duration : '-'}\nStatus: ${status}\nRelease Date : ${month} ${day},${year}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + '%' : '-'}\nStudios: ${name}\nSource: ${source}\nGenres: ${genres.join(' ')} 
+			`
+			ctx.replyWithPhoto({ url: extraLarge },
+				{
+					caption: anime,
+					"reply_markup":{
+						"inline_keyboard":[
+							[{"text":"📖 Read Description", "callback_data": `readDescAnime-${id}`, "hide":false}],
+							[{"text":"🖇 Open On Web", "url": siteUrl, "hide":false}],
+							[{"text":"❌ Close", "callback_data": "closeAnimeDetail", "hide":false}]
+						]}
+				}
+			)
+		})
+		.catch(err => {
+			console.log(err)
+			ctx.reply('Error when get detail Anime')
+		})
+}
+
 module.exports = {
-	anilist
+	anilist,
+	anilistAnime
 }
