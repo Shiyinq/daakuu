@@ -20,7 +20,7 @@ function anilist(ctx, title, variables, paging) {
 				type = type.charAt(0).toUpperCase() + type.slice(1)
 
 				let template = {'text': `${listNumber}`, 'callback_data':  `detail${type}-${m.id}`, 'hide': false}
-				anilists += `${listNumber}. ${m.title.romaji} ${m.score ? 'Score: ' + m.meanScore + '%' : ''}\n`
+				anilists += `${listNumber}. ${m.title.romaji} ${m.meanScore ? 'Score: ' + m.meanScore + '%' : ''}\n`
 
 				if(number <= 5) {
 					buttonDetailInfo[0].push(template)
