@@ -1,5 +1,6 @@
 const api = require('./api')
 const query = require("./query/query")
+const { getMonthString } = require('./utils')
 const TurndownService = require('turndown')
 const  turndownService = new TurndownService()
 
@@ -82,7 +83,7 @@ function anilistAnime(ctx, variables) {
 			}] = media
 
 			let anime = `
-			📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : '-'}\nDuration: ${duration ? duration : '-'}\nStatus: ${status}\nRelease Date : ${month} ${day},${year}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + '%' : '-'}\nStudios: ${name}\nSource: ${source}\nGenres: ${genres.join(' ')} 
+			📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : '-'}\nDuration: ${duration ? duration : '-'}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? ' '+day : ''}, ${year ? year : ''}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + '%' : '-'}\nStudios: ${name}\nSource: ${source}\nGenres: ${genres.join(' ')} 
 			`
 			ctx.replyWithPhoto({ url: extraLarge },
 				{
