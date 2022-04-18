@@ -7,13 +7,20 @@
     "dev": "nodemon",
     "start": "bot.js"
   },
-  "keywords": ["bot", "chatbot", "anime", "animebot", "anilist"],
+  "keywords": [
+    "bot",
+    "chatbot",
+    "anime",
+    "animebot",
+    "anilist"
+  ],
   "author": "Shiyinq",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.0",
     "graphql": "^16.3.0",
     "graphql-request": "^4.2.0",
-    "telegraf": "^4.7.0"
+    "telegraf": "^4.7.0",
+    "turndown": "^7.1.1"
   }
 }
