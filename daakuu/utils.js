@@ -59,18 +59,25 @@ function getNextSeason(current, next) {
   	return nextSeason
 }
 
+function getMonthString(month) {
+	let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	return month ? months[month] : '-'
+}
+
+function getDays(date) {
+	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+	return date ? days[date] : '-'
+}
+
 function getCurrentDate() {
 	let today = new Date();
 
-	let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
 	let year = today.getFullYear()
-	let month = today.getMonth()
-	let monthString = months[month]
-	let season = getSeason(month + 1)
+	let month = today.getMonth() + 1
+	let monthString = getMonthString(month)
+	let season = getSeason(month)
 	let date = today.getDate()
-	let day = days[today.getDay()]
+	let day = getDays(today.getDay())
 
 	return {
 		year,
@@ -85,5 +92,6 @@ function getCurrentDate() {
 module.exports = {
 	getSeason,
 	getCurrentDate,
-	getNextSeason
+	getNextSeason,
+	getMonthString
 }
