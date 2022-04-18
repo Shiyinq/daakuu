@@ -10,7 +10,8 @@ const {
 	top50Anime,
 	topMovies,
 	detailAnime,
-	closeAnimeDetail
+	closeAnimeDetail,
+	readAnimeDesc
 } = require('./daakuu/features')
 
 
