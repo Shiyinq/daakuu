@@ -1,4 +1,4 @@
-const { anilist, anilistAnime } = require('../anilist')
+const { anilist, anilistAnime, anilistAnimeDesc } = require('../anilist')
 
 function trendingAnime(ctx, page=0) {
 	let title =  `📎 ANIME - TRENDING NOW 📈\n\n`
@@ -75,7 +75,6 @@ function topMovies(ctx, page=0) {
 }
 
 function detailAnime(ctx, mediaId) {
-	let title = `ANIME`
 	let variables = {
 		id: mediaId
 	}
@@ -87,8 +86,12 @@ function closeAnimeDetail(ctx) {
 	ctx.deleteMessage()
 }
 
-function readDescAnime(ctx, mediaId) {
+function readAnimeDesc(ctx, mediaId) {
+	let variables = {
+		id: mediaId
+	}
 
+	anilistAnimeDesc(ctx, variables)
 }
 
 module.exports = {
@@ -100,5 +103,5 @@ module.exports = {
 	topMovies,
 	detailAnime,
 	closeAnimeDetail,
-	readDescAnime
+	readAnimeDesc
 }

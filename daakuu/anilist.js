@@ -1,3 +1,5 @@
+const TurndownService = require('turndown')
+const  turndownService = new TurndownService()
 const query = require("./query/query")
 const api = require('./api')
 const { Markup } = require('telegraf')
@@ -78,7 +80,7 @@ function anilistAnime(ctx, variables) {
 					caption: anime,
 					"reply_markup":{
 						"inline_keyboard":[
-							[{"text":"📖 Read Description", "callback_data": `readDescAnime-${id}`, "hide":false}],
+							[{"text":"📖 Read Description", "callback_data": `readAnimeDesc-${id}`, "hide":false}],
 							[{"text":"🖇 Open On Web", "url": siteUrl, "hide":false}],
 							[{"text":"❌ Close", "callback_data": "closeAnimeDetail", "hide":false}]
 						]}
@@ -87,11 +89,38 @@ function anilistAnime(ctx, variables) {
 		})
 		.catch(err => {
 			console.log(err)
-			ctx.reply('Error when get detail Anime')
+			ctx.reply('Error when get Anime')
+		})
+}
+
+function anilistAnimeDesc(ctx, variables) {
+	api(query, variables)
+		.then(( { Page: { media } }) => {
+			let [{
+				title: { romaji },
+				siteUrl,
+				description
+			}] = media
+
+			ctx.reply(
+				romaji + '\n\n' + turndownService.turndown(description),
+				{
+					"reply_markup":{
+						"inline_keyboard":[
+							[{"text":"🖇 Open On Web", "url": siteUrl, "hide":false}],
+							[{"text":"❌ Close", "callback_data": "closeAnimeDetail", "hide":false}]
+						]}
+				}
+			)
+		})
+		.catch(err => {
+			console.log(err)
+			ctx.reply('Error when get Anime Description')
 		})
 }
 
 module.exports = {
 	anilist,
-	anilistAnime
+	anilistAnime,
+	anilistAnimeDesc
 }
