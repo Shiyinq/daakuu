@@ -94,6 +94,19 @@ function readAnimeDesc(ctx, mediaId) {
 	anilistAnimeDesc(ctx, variables)
 }
 
+function mainMenu(ctx) {
+	ctx.editMessageText(`
+	Welcome To DaAKu
+
+	/trending_anime
+	/popular_anime
+	/upcoming_anime
+	/all_time_populer_anime
+	/top_50_anime
+	/top_movies
+	`)
+}
+
 module.exports = {
 	trendingAnime,
 	popularAnime,
@@ -103,5 +116,6 @@ module.exports = {
 	topMovies,
 	detailAnime,
 	closeAnimeDetail,
-	readAnimeDesc
+	readAnimeDesc,
+	mainMenu
 }

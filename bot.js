@@ -11,7 +11,8 @@ const {
 	topMovies,
 	detailAnime,
 	closeAnimeDetail,
-	readAnimeDesc
+	readAnimeDesc,
+	mainMenu
 } = require('./daakuu/features')
 
 
@@ -55,7 +56,7 @@ bot.command(['/top_movies', '/tm'], (ctx) => {
 bot.on('callback_query', (ctx) => {
 	let dataQuery = ctx.callbackQuery.data
 	let [callFunction, page] = dataQuery.split('-')
-
+	
 	eval(callFunction)(ctx, page)
 })
 

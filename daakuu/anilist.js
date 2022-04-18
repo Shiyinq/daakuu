@@ -1,8 +1,7 @@
+const api = require('./api')
+const query = require("./query/query")
 const TurndownService = require('turndown')
 const  turndownService = new TurndownService()
-const query = require("./query/query")
-const api = require('./api')
-const { Markup } = require('telegraf')
 
 function anilist(ctx, title, variables, paging) {
 	let { page, type } = variables
@@ -20,7 +19,7 @@ function anilist(ctx, title, variables, paging) {
 				type = type.toLowerCase()
 				type = type.charAt(0).toUpperCase() + type.slice(1)
 
-				let template = Markup.button.callback(`${listNumber}`, `detail${type}-${m.id}`)
+				let template = {'text': `${listNumber}`, 'callback_data':  `detail${type}-${m.id}`, 'hide': false}
 				anilists += `${listNumber}. ${m.title.romaji} ${m.score ? 'Score: ' + m.meanScore + '%' : ''}\n`
 
 				if(number <= 5) {
@@ -33,17 +32,27 @@ function anilist(ctx, title, variables, paging) {
 			anilists += `\nPage: ${currentPage}`
 
 			if(currentPage != 1) {
-				buttonDetailInfo[2].push(Markup.button.callback(`Prev Page ${currentPage - 1}`, `${paging}-${currentPage - 1}`))
+				buttonDetailInfo[2].push({'text': `⬅️ Prev Page ${currentPage - 1}`, 'callback_data': `${paging}-${currentPage - 1}`, 'hide': false})
 			}
 
+			buttonDetailInfo[2].push({'text': `🗒 Main Menu`, 'callback_data': `mainMenu`, 'hide': false})
+
 			if(hasNextPage) {
-				buttonDetailInfo[2].push(Markup.button.callback(`Next Page ${currentPage + 1}`, `${paging}-${currentPage + 1}`))
+				buttonDetailInfo[2].push({'text': `Next Page ${currentPage + 1} ➡️`, 'callback_data': `${paging}-${currentPage + 1}`, 'hide': false})
 			}
 
 			if(page == 0) {
-				ctx.reply(anilists, Markup.inlineKeyboard(buttonDetailInfo))
+				ctx.reply(anilists, {
+					"reply_markup":{
+						"inline_keyboard": buttonDetailInfo
+					}
+				})
 			}else {
-				ctx.editMessageText(anilists, Markup.inlineKeyboard(buttonDetailInfo))
+				ctx.editMessageText(anilists, {
+					"reply_markup":{
+						"inline_keyboard": buttonDetailInfo
+					}
+				})
 			}
 		})
 		.catch(err => {
