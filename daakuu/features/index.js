@@ -1,4 +1,4 @@
-const { getCurrentDate, getNextSeason } = require('../utils')
+const { getCurrentDate, getNextSeason, textMenu } = require('../utils')
 const { anilist, anilistAnime, anilistAnimeDesc } = require('../anilist')
 
 function trendingAnime(ctx, page=0) {
@@ -98,17 +98,56 @@ function readAnimeDesc(ctx, mediaId) {
 	anilistAnimeDesc(ctx, variables)
 }
 
-function mainMenu(ctx) {
-	ctx.editMessageText(`
-	Welcome To DaAKu
+function trendingManga(ctx, page=0) {
+	let title =  `📎 MANGA - TRENDING NOW 📈\n\n`
+	let variables = {
+		"page": page,
+		"perPage": 10,
+		"type": "MANGA",
+		"sort": ["TRENDING_DESC", "POPULARITY_DESC"]
+	}
 
-	/trending_anime
-	/popular_anime
-	/upcoming_anime
-	/all_time_populer_anime
-	/top_50_anime
-	/top_movies
-	`)
+	anilist(ctx, title, variables, "trendingManga")
+}
+
+function allTimePopulerManga(ctx, page=0) {
+	let title = `📎 MANGA - ALL TIME POPULAR 📈\n\n`
+	let variables = {
+		"page": page,
+		"perPage": 10,
+		"type": "MANGA",
+		"sort": ["POPULARITY_DESC"]
+	}
+
+	anilist(ctx, title, variables, "allTimePopulerManga")
+}
+
+function popularManhwa(ctx, page=0) {
+	let title = `📎 MANHWA - POPULAR 📈\n\n`
+	let variables = {
+		"page": page,
+		"perPage": 10,
+		"type": "MANGA",
+		"countryOfOrigin": "KR",
+		"sort": ["SCORE_DESC"]
+	}
+
+	anilist(ctx, title, variables, "popularManhwa")
+}
+
+function top50Manga(ctx, page=0) {
+	let title = `📎 MANGA - TOP 50 📈\n\n`
+	let variables = {
+		"page": page,
+		"perPage": 10,
+		"type": "MANGA",
+		"sort": ["SCORE_DESC"]
+	}
+	anilist(ctx, title, variables, "top50Manga")
+}
+
+function mainMenu(ctx) {
+	ctx.editMessageText(textMenu())
 }
 
 module.exports = {
@@ -121,5 +160,9 @@ module.exports = {
 	detailAnime,
 	closeAnimeDetail,
 	readAnimeDesc,
-	mainMenu
+	mainMenu,
+	trendingManga,
+	allTimePopulerManga,
+	popularManhwa,
+	top50Manga
 }

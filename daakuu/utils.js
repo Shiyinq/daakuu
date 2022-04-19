@@ -89,9 +89,33 @@ function getCurrentDate() {
 	}
 }
 
+function textMenu() {
+	let menu = `
+	📍Welcome to DaAKu
+
+	📺 Anime
+	/trending_anime
+	/popular_anime
+	/upcoming_anime
+	/all_time_populer_anime
+	/top_50_anime
+	/top_movies
+
+	📚 Manga
+	/trending_manga
+	/all_time_populer_manga
+	/popular_manhwa
+	/top_50_manga
+
+	source: anilist.co
+	`
+	return menu
+}
+
 module.exports = {
 	getSeason,
 	getCurrentDate,
 	getNextSeason,
-	getMonthString
+	getMonthString,
+	textMenu
 }
