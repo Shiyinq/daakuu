@@ -1,4 +1,5 @@
 require('dotenv').config()
+const { textMenu } = require('./daakuu/utils')
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
@@ -12,21 +13,16 @@ const {
 	detailAnime,
 	closeAnimeDetail,
 	readAnimeDesc,
-	mainMenu
+	mainMenu,
+	trendingManga,
+	allTimePopulerManga,
+	popularManhwa,
+	top50Manga
 } = require('./daakuu/features')
 
 
 bot.start((ctx) => {
-    ctx.reply(`
-	Welcome To DaAKu
-
-	/trending_anime
-	/popular_anime
-	/upcoming_anime
-	/all_time_populer_anime
-	/top_50_anime
-	/top_movies
-	`)
+    ctx.reply(textMenu())
 })
 
 bot.command(['/trending_anime', '/ta'], (ctx) => {
@@ -51,6 +47,22 @@ bot.command(['/top_50_anime', '/t50a'], (ctx) => {
 
 bot.command(['/top_movies', '/tm'], (ctx) => {
 	topMovies(ctx, 0)
+})
+
+bot.command(['/trending_manga', '/tma'], (ctx) => {
+	trendingManga(ctx, 0)
+})
+
+bot.command(['/all_time_populer_manga', '/atpm'], (ctx) => {
+	allTimePopulerManga(ctx, 0)
+})
+
+bot.command(['/popular_manhwa', '/pmh'], (ctx) => {
+	popularManhwa(ctx, 0)
+})
+
+bot.command(['/top_50_manga', '/t50m'], (ctx) => {
+	top50Manga(ctx, 0)
 })
 
 bot.on('callback_query', (ctx) => {
