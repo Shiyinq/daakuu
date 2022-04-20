@@ -1,5 +1,5 @@
 const { getCurrentDate, getNextSeason, textMenu } = require('../utils')
-const { anilist, anilistAnime, anilistAnimeDesc } = require('../anilist')
+const { anilist, anilistDetail, anilistDesc } = require('../anilist')
 
 function trendingAnime(ctx, page=0) {
 	let title =  `📎 ANIME - TRENDING NOW 📈\n\n`
@@ -83,19 +83,27 @@ function detailAnime(ctx, mediaId) {
 		id: mediaId
 	}
 
-	anilistAnime(ctx, variables)
+	anilistDetail(ctx, variables, 'ANIME')
 }
 
-function closeAnimeDetail(ctx) {
-	ctx.deleteMessage()
-}
-
-function readAnimeDesc(ctx, mediaId) {
+function detailManga(ctx, mediaId) {
 	let variables = {
 		id: mediaId
 	}
 
-	anilistAnimeDesc(ctx, variables)
+	anilistDetail(ctx, variables, 'MANGA')
+}
+
+function closeDesc(ctx) {
+	ctx.deleteMessage()
+}
+
+function readDesc(ctx, mediaId) {
+	let variables = {
+		id: mediaId
+	}
+
+	anilistDesc(ctx, variables)
 }
 
 function trendingManga(ctx, page=0) {
@@ -158,8 +166,9 @@ module.exports = {
 	top50Anime,
 	topMovies,
 	detailAnime,
-	closeAnimeDetail,
-	readAnimeDesc,
+	detailManga,
+	closeDesc,
+	readDesc,
 	mainMenu,
 	trendingManga,
 	allTimePopulerManga,
