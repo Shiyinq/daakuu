@@ -92,6 +92,12 @@ function getCurrentDate() {
 function textMenu() {
 	let menu = `
 	📍Welcome to DaAKu
+	
+	🧭 Explore
+	/search_anime (soon)
+	/search_manga (soon)
+	/recommendations (soon)
+	/genres (soon)
 
 	📺 Anime
 	/trending_anime
@@ -106,6 +112,14 @@ function textMenu() {
 	/all_time_populer_manga
 	/popular_manhwa
 	/top_50_manga
+	
+	😎 Figure
+	/staff (soon)
+	/characters (soon)
+
+	🌐 Other
+	/forum (soon)
+	/reviews (soon)
 
 	source: anilist.co
 	`
