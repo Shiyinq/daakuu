@@ -78,34 +78,6 @@ function topMovies(ctx, page=0) {
 	anilist(ctx, title, variables, "topMovies")
 }
 
-function detailAnime(ctx, mediaId) {
-	let variables = {
-		id: mediaId
-	}
-
-	anilistDetail(ctx, variables, 'ANIME')
-}
-
-function detailManga(ctx, mediaId) {
-	let variables = {
-		id: mediaId
-	}
-
-	anilistDetail(ctx, variables, 'MANGA')
-}
-
-function closeDesc(ctx) {
-	ctx.deleteMessage()
-}
-
-function readDesc(ctx, mediaId) {
-	let variables = {
-		id: mediaId
-	}
-
-	anilistDesc(ctx, variables)
-}
-
 function trendingManga(ctx, page=0) {
 	let title =  `📎 MANGA - TRENDING NOW 📈\n\n`
 	let variables = {
@@ -154,6 +126,34 @@ function top50Manga(ctx, page=0) {
 	anilist(ctx, title, variables, "top50Manga")
 }
 
+function detailAnime(ctx, mediaId) {
+	let variables = {
+		id: mediaId
+	}
+
+	anilistDetail(ctx, variables, 'ANIME')
+}
+
+function detailManga(ctx, mediaId) {
+	let variables = {
+		id: mediaId
+	}
+
+	anilistDetail(ctx, variables, 'MANGA')
+}
+
+function closeDesc(ctx) {
+	ctx.deleteMessage()
+}
+
+function readDesc(ctx, mediaId) {
+	let variables = {
+		id: mediaId
+	}
+
+	anilistDesc(ctx, variables)
+}
+
 function mainMenu(ctx) {
 	ctx.editMessageText(textMenu())
 }
@@ -164,14 +164,14 @@ module.exports = {
 	upcomingAnime,
 	allTimePopulerAnime,
 	top50Anime,
-	topMovies,
+	topMovies,	
+	trendingManga,
+	allTimePopulerManga,
+	popularManhwa,
+	top50Manga,
 	detailAnime,
 	detailManga,
 	closeDesc,
 	readDesc,
-	mainMenu,
-	trendingManga,
-	allTimePopulerManga,
-	popularManhwa,
-	top50Manga
+	mainMenu
 }
