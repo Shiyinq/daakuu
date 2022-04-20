@@ -20,6 +20,7 @@ query ($page: Int, $perPage: Int, $id: Int, $type: MediaType, $countryOfOrigin: 
 			}
 			description
 			format
+			chapters
 			episodes
 			duration
 			status
