@@ -3,21 +3,22 @@ const { textMenu } = require('./daakuu/utils')
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const { 
+const { 	
 	trendingAnime, 
 	popularAnime, 
 	upcomingAnime,
 	allTimePopulerAnime,
 	top50Anime,
 	topMovies,
-	detailAnime,
-	closeAnimeDetail,
-	readAnimeDesc,
-	mainMenu,
 	trendingManga,
 	allTimePopulerManga,
 	popularManhwa,
-	top50Manga
+	top50Manga,
+	detailAnime,
+	detailManga,
+	closeDesc,
+	readDesc,
+	mainMenu,
 } = require('./daakuu/features')
 
 

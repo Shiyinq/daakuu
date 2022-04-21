@@ -21,7 +21,7 @@ function anilist(ctx, title, variables, paging) {
 				type = type.charAt(0).toUpperCase() + type.slice(1)
 
 				let template = {'text': `${listNumber}`, 'callback_data':  `detail${type}-${m.id}`, 'hide': false}
-				anilists += `${listNumber}. ${m.title.romaji} ${m.meanScore ? 'Score: ' + m.meanScore + '%' : ''}\n`
+				anilists += `${listNumber}. ${m.title.romaji} ${m.meanScore ? '- Score: ' + m.meanScore + '%' : ''}\n`
 
 				if(number <= 5) {
 					buttonDetailInfo[0].push(template)
@@ -62,7 +62,7 @@ function anilist(ctx, title, variables, paging) {
 		})
 }
 
-function anilistAnime(ctx, variables) {
+function anilistDetail(ctx, variables, type) {
 	api(query, variables)
 		.then(( { Page: { media } }) => {
 			let [{
@@ -73,26 +73,40 @@ function anilistAnime(ctx, variables) {
 				episodes,
 				duration,
 				status,
-				startDate: {year, month, day}, 
+				startDate: {year, month, day},
+				chapters, 
 				season,
 				meanScore,
-				studios: { nodes: [{ name }] }, 
+				studios: { nodes }, 
 				source,
 				genres,
 				siteUrl
 			}] = media
 
-			let anime = `
-			📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : '-'}\nDuration: ${duration ? duration : '-'}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? ' '+day : ''}, ${year ? year : ''}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + '%' : '-'}\nStudios: ${name}\nSource: ${source}\nGenres: ${genres.join(' ')} 
-			`
+			let detail = ''
+			switch (type) {
+				case 'ANIME':
+					detail = `
+					📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : '-'}\nDuration: ${duration ? duration : '-'}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? ' '+day : ''}, ${year ? year : ''}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + '%' : '-'}\nStudios: ${nodes.length > 0 ? nodes.name : '-'}\nSource: ${source}\nGenres: ${genres.join(' ')} 
+					`
+					break;
+				case 'MANGA':
+					detail = `
+					📌 ${romaji}\n\nFormat: ${format}\nChapters: ${chapters}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? ' '+day : ''}, ${year ? year : ''}\nSource: ${source}\nGenres: ${genres.join(' ')} 
+					`
+					break;
+				default:
+					break;
+			}
+		
 			ctx.replyWithPhoto({ url: extraLarge },
 				{
-					caption: anime,
+					caption: detail,
 					"reply_markup":{
 						"inline_keyboard":[
-							[{"text":"📖 Read Description", "callback_data": `readAnimeDesc-${id}`, "hide":false}],
+							[{"text":"📖 Read Description", "callback_data": `readDesc-${id}`, "hide":false}],
 							[{"text":"🖇 Open On Web", "url": siteUrl, "hide":false}],
-							[{"text":"❌ Close", "callback_data": "closeAnimeDetail", "hide":false}]
+							[{"text":"❌ Close", "callback_data": "closeDesc", "hide":false}]
 						]}
 				}
 			)
@@ -103,7 +117,7 @@ function anilistAnime(ctx, variables) {
 		})
 }
 
-function anilistAnimeDesc(ctx, variables) {
+function anilistDesc(ctx, variables) {
 	api(query, variables)
 		.then(( { Page: { media } }) => {
 			let [{
@@ -118,19 +132,19 @@ function anilistAnimeDesc(ctx, variables) {
 					"reply_markup":{
 						"inline_keyboard":[
 							[{"text":"🖇 Open On Web", "url": siteUrl, "hide":false}],
-							[{"text":"❌ Close", "callback_data": "closeAnimeDetail", "hide":false}]
+							[{"text":"❌ Close", "callback_data": "closeDesc", "hide":false}]
 						]}
 				}
 			)
 		})
 		.catch(err => {
 			console.log(err)
-			ctx.reply('Error when get Anime Description')
+			ctx.reply('Error when get Description')
 		})
 }
 
 module.exports = {
 	anilist,
-	anilistAnime,
-	anilistAnimeDesc
+	anilistDetail,
+	anilistDesc
 }
