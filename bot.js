@@ -22,7 +22,7 @@ const {
 } = require('./daakuu/features')
 
 
-bot.start((ctx) => {
+bot.command(['/start', '/menu'], (ctx) => {
     ctx.reply(textMenu())
 })
 
