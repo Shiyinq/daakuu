@@ -121,6 +121,10 @@ function textMenu() {
 	/forum (soon)
 	/reviews (soon)
 
+	🏠 DaAKuu
+	/menu
+	/about
+
 	source: anilist.co
 	`
 	return menu
