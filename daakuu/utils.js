@@ -118,7 +118,7 @@ function textMenu() {
 	/characters (soon)
 
 	🌐 Other
-	/forum (soon)
+	/forum
 	/reviews (soon)
 
 	🏠 DaAKuu
