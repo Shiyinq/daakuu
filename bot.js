@@ -66,6 +66,14 @@ bot.command(['/top_50_manga', '/t50m'], (ctx) => {
 	top50Manga(ctx, 0)
 })
 
+bot.command(['/forum'], (ctx) => {
+	ctx.reply('You can access forum on the web',  {
+		"reply_markup":{
+			"inline_keyboard": [[{"text":"Go to Forum", "url": 'https://anilist.co/forum/overview', "hide":false}]]
+		}
+	})
+})
+
 bot.command(['/about'], (ctx) => {
 	ctx.replyWithMarkdown('DaAkuu (Daftar Anime Kuu) is unofficial anilis.co bot.\n\nYou can visit our [repository](https://github.com/Shiyinq/daakuu) to contribute or submit issue.',{ 
 		disable_web_page_preview: true 
