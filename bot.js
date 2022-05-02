@@ -14,6 +14,8 @@ const {
 	allTimePopulerManga,
 	popularManhwa,
 	top50Manga,
+	searchAnime,
+	searchManga,
 	detailAnime,
 	detailManga,
 	closeDesc,
@@ -66,6 +68,24 @@ bot.command(['/top_50_manga', '/t50m'], (ctx) => {
 	top50Manga(ctx, 0)
 })
 
+bot.command(['/search_anime', '/sa'], (ctx) => {
+	let { message: {text} } = ctx
+	text = text.trim().split(' ')
+	text.splice(0, 1)
+	text = text.join(' ')
+
+	searchAnime(ctx, 0, text)
+})
+
+bot.command(['/search_manga', '/sm'], (ctx) => {
+	let { message: {text} } = ctx
+	text = text.trim().split(' ')
+	text.splice(0, 1)
+	text = text.join(' ')
+
+	searchManga(ctx, 0, text)
+})
+
 bot.command(['/forum'], (ctx) => {
 	ctx.reply('You can access forum on the web',  {
 		"reply_markup":{
@@ -85,9 +105,9 @@ bot.command(['/about'], (ctx) => {
 
 bot.on('callback_query', (ctx) => {
 	let dataQuery = ctx.callbackQuery.data
-	let [callFunction, page] = dataQuery.split('-')
+	let [callFunction, page, search] = dataQuery.split('-')
 	
-	eval(callFunction)(ctx, page)
+	eval(callFunction)(ctx, page, search)
 })
 
 bot.launch()
