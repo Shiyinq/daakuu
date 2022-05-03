@@ -89,6 +89,14 @@ function getCurrentDate() {
 	}
 }
 
+function getArgs(text) {
+	text = text.trim().split(' ')
+	text.splice(0, 1)
+	text = text.join(' ')
+
+	return text
+}
+
 function textMenu() {
 	let menu = `
 	📍Welcome to DaAKu
@@ -135,5 +143,6 @@ module.exports = {
 	getCurrentDate,
 	getNextSeason,
 	getMonthString,
+	getArgs,
 	textMenu
 }

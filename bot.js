@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { textMenu } = require('./daakuu/utils')
+const { getArgs, textMenu } = require('./daakuu/utils')
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
@@ -69,21 +69,11 @@ bot.command(['/top_50_manga', '/t50m'], (ctx) => {
 })
 
 bot.command(['/search_anime', '/sa'], (ctx) => {
-	let { message: {text} } = ctx
-	text = text.trim().split(' ')
-	text.splice(0, 1)
-	text = text.join(' ')
-
-	searchAnime(ctx, 0, text)
+	searchAnime(ctx, 0, getArgs(ctx.message.text))
 })
 
 bot.command(['/search_manga', '/sm'], (ctx) => {
-	let { message: {text} } = ctx
-	text = text.trim().split(' ')
-	text.splice(0, 1)
-	text = text.join(' ')
-
-	searchManga(ctx, 0, text)
+	searchManga(ctx, 0, getArgs(ctx.message.text))
 })
 
 bot.command(['/forum'], (ctx) => {
