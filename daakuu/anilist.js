@@ -5,7 +5,7 @@ const TurndownService = require('turndown')
 const  turndownService = new TurndownService()
 
 function anilist(ctx, title, variables, paging) {
-	let { page, type } = variables
+	let { page, type, search } = variables
 
 	api(query, variables)
 		.then(( {Page: {pageInfo: {currentPage, perPage, hasNextPage}, media} }) => {
@@ -33,13 +33,13 @@ function anilist(ctx, title, variables, paging) {
 			anilists += `\nPage: ${currentPage}`
 
 			if(currentPage != 1) {
-				buttonDetailInfo[2].push({'text': `⬅️ Prev Page ${currentPage - 1}`, 'callback_data': `${paging}-${currentPage - 1}`, 'hide': false})
+				buttonDetailInfo[2].push({'text': `⬅️ Prev Page ${currentPage - 1}`, 'callback_data': `${paging}-${currentPage - 1}-${search}`, 'hide': false})
 			}
 
 			buttonDetailInfo[2].push({'text': `🗒 Main Menu`, 'callback_data': `mainMenu`, 'hide': false})
 
 			if(hasNextPage) {
-				buttonDetailInfo[2].push({'text': `Next Page ${currentPage + 1} ➡️`, 'callback_data': `${paging}-${currentPage + 1}`, 'hide': false})
+				buttonDetailInfo[2].push({'text': `Next Page ${currentPage + 1} ➡️`, 'callback_data': `${paging}-${currentPage + 1}-${search}`, 'hide': false})
 			}
 
 			if(page == 0) {

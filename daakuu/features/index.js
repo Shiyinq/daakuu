@@ -126,6 +126,30 @@ function top50Manga(ctx, page=0) {
 	anilist(ctx, title, variables, "top50Manga")
 }
 
+function searchAnime(ctx, page=0, search) {
+	let title = `🔍 Search Anime: ${search}\n\n`
+	let variables = {
+		"page": page,
+		"perPage": 10,
+		"type": "ANIME",
+		"sort": "SEARCH_MATCH",
+		"search": search
+	};
+	anilist(ctx, title, variables, "searchAnime")
+}
+
+function searchManga(ctx, page=0, search) {
+	let title = `🔍 Search Manga: ${search}\n\n`
+	let variables = {
+		"page": page,
+		"perPage": 10,
+		"type": "MANGA",
+		"sort": "SEARCH_MATCH",
+		"search": search
+	};
+	anilist(ctx, title, variables, "searchManga")
+}
+
 function detailAnime(ctx, mediaId) {
 	let variables = {
 		id: mediaId
@@ -169,6 +193,8 @@ module.exports = {
 	allTimePopulerManga,
 	popularManhwa,
 	top50Manga,
+	searchAnime,
+	searchManga,
 	detailAnime,
 	detailManga,
 	closeDesc,

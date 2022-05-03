@@ -89,13 +89,21 @@ function getCurrentDate() {
 	}
 }
 
+function getArgs(text) {
+	text = text.trim().split(' ')
+	text.splice(0, 1)
+	text = text.join(' ')
+
+	return text
+}
+
 function textMenu() {
 	let menu = `
 	📍Welcome to DaAKu
 	
 	🧭 Explore
-	/search_anime (soon)
-	/search_manga (soon)
+	/search_anime <title>
+	/search_manga <title>
 	/recommendations (soon)
 	/genres (soon)
 
@@ -135,5 +143,6 @@ module.exports = {
 	getCurrentDate,
 	getNextSeason,
 	getMonthString,
+	getArgs,
 	textMenu
 }
