@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { textMenu } = require('./daakuu/utils')
+const { getArgs, textMenu } = require('./daakuu/utils')
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
@@ -14,6 +14,8 @@ const {
 	allTimePopulerManga,
 	popularManhwa,
 	top50Manga,
+	searchAnime,
+	searchManga,
 	detailAnime,
 	detailManga,
 	closeDesc,
@@ -66,6 +68,14 @@ bot.command(['/top_50_manga', '/t50m'], (ctx) => {
 	top50Manga(ctx, 0)
 })
 
+bot.command(['/search_anime', '/sa'], (ctx) => {
+	searchAnime(ctx, 0, getArgs(ctx.message.text))
+})
+
+bot.command(['/search_manga', '/sm'], (ctx) => {
+	searchManga(ctx, 0, getArgs(ctx.message.text))
+})
+
 bot.command(['/forum'], (ctx) => {
 	ctx.reply('You can access forum on the web',  {
 		"reply_markup":{
@@ -85,9 +95,9 @@ bot.command(['/about'], (ctx) => {
 
 bot.on('callback_query', (ctx) => {
 	let dataQuery = ctx.callbackQuery.data
-	let [callFunction, page] = dataQuery.split('-')
+	let [callFunction, page, search] = dataQuery.split('-')
 	
-	eval(callFunction)(ctx, page)
+	eval(callFunction)(ctx, page, search)
 })
 
 bot.launch()
