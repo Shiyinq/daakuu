@@ -16,6 +16,7 @@ const {
 	top50Manga,
 	searchAnime,
 	searchManga,
+	suggestions,
 	detailAnime,
 	detailManga,
 	closeDesc,
@@ -76,6 +77,10 @@ bot.command(['/search_manga', '/sm'], (ctx) => {
 	searchManga(ctx, 0, getArgs(ctx.message.text))
 })
 
+bot.command(['/recommendations', '/rcm'], (ctx) => {
+	suggestions(ctx, 0, getArgs(ctx.message.text))
+})
+
 bot.command(['/forum'], (ctx) => {
 	ctx.reply('You can access forum on the web',  {
 		"reply_markup":{
@@ -96,7 +101,7 @@ bot.command(['/about'], (ctx) => {
 bot.on('callback_query', (ctx) => {
 	let dataQuery = ctx.callbackQuery.data
 	let [callFunction, page, search] = dataQuery.split('-')
-	
+	console.log(dataQuery)	
 	eval(callFunction)(ctx, page, search)
 })
 

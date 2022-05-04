@@ -1,6 +1,6 @@
 const api = require('./api')
-const query = require("./query/queryMedia")
-const { getMonthString } = require('./utils')
+const query = require("../query/queryMedia")
+const { getMonthString } = require('../utils')
 const TurndownService = require('turndown')
 const  turndownService = new TurndownService()
 
