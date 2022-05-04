@@ -1,5 +1,6 @@
 const { getCurrentDate, getNextSeason, textMenu } = require('../utils')
-const { media, mediaDetail, mediaDesc } = require('../media')
+const { media, mediaDetail, mediaDesc } = require('../anilist/media')
+const { recommendations } = require('../anilist/recommendations')
 
 function trendingAnime(ctx, page=0) {
 	let title =  `📎 ANIME - TRENDING NOW 📈\n\n`
@@ -150,6 +151,16 @@ function searchManga(ctx, page=0, search) {
 	media(ctx, title, variables, "searchManga")
 }
 
+function suggestions(ctx, page=0) {
+	let title = `🗒 Recommendations\n\n`
+	let variables = {
+		"page": page,
+		"perPage": 10,
+		"sort": "RATING_DESC"
+	}
+	recommendations(ctx, title, variables, "suggestions")
+}
+
 function detailAnime(ctx, mediaId) {
 	let variables = {
 		id: mediaId
@@ -196,6 +207,7 @@ module.exports = {
 	searchAnime,
 	searchManga,
 	detailAnime,
+	suggestions,
 	detailManga,
 	closeDesc,
 	readDesc,

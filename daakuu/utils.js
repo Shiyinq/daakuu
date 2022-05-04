@@ -104,7 +104,7 @@ function textMenu() {
 	🧭 Explore
 	/search_anime <title>
 	/search_manga <title>
-	/recommendations (soon)
+	/recommendations
 	/genres (soon)
 
 	📺 Anime
