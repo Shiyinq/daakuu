@@ -4,13 +4,13 @@ const { getMonthString } = require('./utils')
 const TurndownService = require('turndown')
 const  turndownService = new TurndownService()
 
-function anilist(ctx, title, variables, paging) {
+function media(ctx, title, variables, paging) {
 	let { page, type, search } = variables
 
 	api(query, variables)
 		.then(( {Page: {pageInfo: {currentPage, perPage, hasNextPage}, media} }) => {
 
-			let anilists = title
+			let mediaInfo = title
 			let buttonDetailInfo = [ [], [], [] ]
 
 			media.forEach((m , i) => {
@@ -21,7 +21,7 @@ function anilist(ctx, title, variables, paging) {
 				type = type.charAt(0).toUpperCase() + type.slice(1)
 
 				let template = {'text': `${listNumber}`, 'callback_data':  `detail${type}-${m.id}`, 'hide': false}
-				anilists += `${listNumber}. ${m.title.romaji} ${m.meanScore ? '- Score: ' + m.meanScore + '%' : ''}\n`
+				mediaInfo += `${listNumber}. ${m.title.romaji} ${m.meanScore ? '- Score: ' + m.meanScore + '%' : ''}\n`
 
 				if(number <= 5) {
 					buttonDetailInfo[0].push(template)
@@ -30,7 +30,7 @@ function anilist(ctx, title, variables, paging) {
 				}
 			})
 
-			anilists += `\nPage: ${currentPage}`
+			mediaInfo += `\nPage: ${currentPage}`
 
 			if(currentPage != 1) {
 				buttonDetailInfo[2].push({'text': `⬅️ Prev Page ${currentPage - 1}`, 'callback_data': `${paging}-${currentPage - 1}-${search}`, 'hide': false})
@@ -43,13 +43,13 @@ function anilist(ctx, title, variables, paging) {
 			}
 
 			if(page == 0) {
-				ctx.reply(anilists, {
+				ctx.reply(mediaInfo, {
 					"reply_markup":{
 						"inline_keyboard": buttonDetailInfo
 					}
 				})
 			}else {
-				ctx.editMessageText(anilists, {
+				ctx.editMessageText(mediaInfo, {
 					"reply_markup":{
 						"inline_keyboard": buttonDetailInfo
 					}
@@ -62,7 +62,7 @@ function anilist(ctx, title, variables, paging) {
 		})
 }
 
-function anilistDetail(ctx, variables, type) {
+function mediaDetail(ctx, variables, type) {
 	api(query, variables)
 		.then(( { Page: { media } }) => {
 			let [{
@@ -117,7 +117,7 @@ function anilistDetail(ctx, variables, type) {
 		})
 }
 
-function anilistDesc(ctx, variables) {
+function mediaDesc(ctx, variables) {
 	api(query, variables)
 		.then(( { Page: { media } }) => {
 			let [{
@@ -144,7 +144,7 @@ function anilistDesc(ctx, variables) {
 }
 
 module.exports = {
-	anilist,
-	anilistDetail,
-	anilistDesc
+	media,
+	mediaDetail,
+	mediaDesc
 }
