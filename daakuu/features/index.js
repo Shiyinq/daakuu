@@ -1,5 +1,6 @@
-const { getCurrentDate, getNextSeason, textMenu } = require('../utils')
-const { anilist, anilistDetail, anilistDesc } = require('../anilist')
+const { getCurrentDate, getNextSeason, textMenu } = require("../utils")
+const { media, mediaDetail, mediaDesc } = require("../anilist/media")
+const { recommendations } = require("../anilist/recommendations")
 
 function trendingAnime(ctx, page=0) {
 	let title =  `📎 ANIME - TRENDING NOW 📈\n\n`
@@ -10,7 +11,7 @@ function trendingAnime(ctx, page=0) {
 		"sort": ["TRENDING_DESC", "POPULARITY_DESC"]
 	}
 
-	anilist(ctx, title, variables, "trendingAnime")
+	media(ctx, title, variables, "trendingAnime")
 }
 
 function popularAnime(ctx, page=0) {
@@ -25,7 +26,7 @@ function popularAnime(ctx, page=0) {
 		"sort": ["POPULARITY_DESC"]
 	}
 
-	anilist(ctx, title, variables, "popularAnime")
+	media(ctx, title, variables, "popularAnime")
 }
 
 function upcomingAnime(ctx, page=0) {
@@ -41,7 +42,7 @@ function upcomingAnime(ctx, page=0) {
 		"sort": ["POPULARITY_DESC"]
 	}
 
-	anilist(ctx, title, variables, "upcomingAnime")
+	media(ctx, title, variables, "upcomingAnime")
 }
 
 function allTimePopulerAnime(ctx, page=0) {
@@ -52,7 +53,7 @@ function allTimePopulerAnime(ctx, page=0) {
 		"type": "ANIME",
 		"sort": ["POPULARITY_DESC"]
 	}
-	anilist(ctx, title, variables, "allTimePopulerAnime")
+	media(ctx, title, variables, "allTimePopulerAnime")
 }
 
 function top50Anime(ctx, page=0) {
@@ -63,7 +64,7 @@ function top50Anime(ctx, page=0) {
 		"type": "ANIME",
 		"sort": ["SCORE_DESC"]
 	}
-	anilist(ctx, title, variables, "top50Anime")
+	media(ctx, title, variables, "top50Anime")
 }
 
 function topMovies(ctx, page=0) {
@@ -75,7 +76,7 @@ function topMovies(ctx, page=0) {
 		"format_in": ["MOVIE"],
 		"sort": ["SCORE_DESC"]
 	}
-	anilist(ctx, title, variables, "topMovies")
+	media(ctx, title, variables, "topMovies")
 }
 
 function trendingManga(ctx, page=0) {
@@ -87,7 +88,7 @@ function trendingManga(ctx, page=0) {
 		"sort": ["TRENDING_DESC", "POPULARITY_DESC"]
 	}
 
-	anilist(ctx, title, variables, "trendingManga")
+	media(ctx, title, variables, "trendingManga")
 }
 
 function allTimePopulerManga(ctx, page=0) {
@@ -99,7 +100,7 @@ function allTimePopulerManga(ctx, page=0) {
 		"sort": ["POPULARITY_DESC"]
 	}
 
-	anilist(ctx, title, variables, "allTimePopulerManga")
+	media(ctx, title, variables, "allTimePopulerManga")
 }
 
 function popularManhwa(ctx, page=0) {
@@ -112,7 +113,7 @@ function popularManhwa(ctx, page=0) {
 		"sort": ["SCORE_DESC"]
 	}
 
-	anilist(ctx, title, variables, "popularManhwa")
+	media(ctx, title, variables, "popularManhwa")
 }
 
 function top50Manga(ctx, page=0) {
@@ -123,7 +124,7 @@ function top50Manga(ctx, page=0) {
 		"type": "MANGA",
 		"sort": ["SCORE_DESC"]
 	}
-	anilist(ctx, title, variables, "top50Manga")
+	media(ctx, title, variables, "top50Manga")
 }
 
 function searchAnime(ctx, page=0, search) {
@@ -135,7 +136,7 @@ function searchAnime(ctx, page=0, search) {
 		"sort": "SEARCH_MATCH",
 		"search": search
 	};
-	anilist(ctx, title, variables, "searchAnime")
+	media(ctx, title, variables, "searchAnime")
 }
 
 function searchManga(ctx, page=0, search) {
@@ -147,7 +148,25 @@ function searchManga(ctx, page=0, search) {
 		"sort": "SEARCH_MATCH",
 		"search": search
 	};
-	anilist(ctx, title, variables, "searchManga")
+	media(ctx, title, variables, "searchManga")
+}
+
+function suggestions(ctx, page=0) {
+	let title = `🗒 Recommendations\n\n`
+	let variables = {
+		"page": page,
+		"perPage": 10,
+		"sort": "RATING_DESC"
+	}
+	recommendations(ctx, title, variables, "suggestions")
+}
+
+function detailSuggestion(ctx, mediaId) {
+	mediaId = mediaId.split("|")
+
+	for (let id of mediaId) {
+		mediaDetail(ctx, { id: id }, "ANIME")
+	}
 }
 
 function detailAnime(ctx, mediaId) {
@@ -155,7 +174,7 @@ function detailAnime(ctx, mediaId) {
 		id: mediaId
 	}
 
-	anilistDetail(ctx, variables, 'ANIME')
+	mediaDetail(ctx, variables, "ANIME")
 }
 
 function detailManga(ctx, mediaId) {
@@ -163,7 +182,7 @@ function detailManga(ctx, mediaId) {
 		id: mediaId
 	}
 
-	anilistDetail(ctx, variables, 'MANGA')
+	mediaDetail(ctx, variables, "MANGA")
 }
 
 function closeDesc(ctx) {
@@ -175,7 +194,7 @@ function readDesc(ctx, mediaId) {
 		id: mediaId
 	}
 
-	anilistDesc(ctx, variables)
+	mediaDesc(ctx, variables)
 }
 
 function mainMenu(ctx) {
@@ -195,6 +214,8 @@ module.exports = {
 	top50Manga,
 	searchAnime,
 	searchManga,
+	suggestions,
+	detailSuggestion,
 	detailAnime,
 	detailManga,
 	closeDesc,
