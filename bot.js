@@ -102,7 +102,7 @@ bot.command(["/about"], (ctx) => {
 bot.on("callback_query", (ctx) => {
 	let dataQuery = ctx.callbackQuery.data
 	let [callFunction, page, search] = dataQuery.split("-")
-	console.log(dataQuery)	
+
 	eval(callFunction)(ctx, page, search)
 })
 
