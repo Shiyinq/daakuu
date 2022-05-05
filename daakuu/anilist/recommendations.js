@@ -14,7 +14,7 @@ function recommendations(ctx, title, variables, paging) {
 				let number = i + 1 
 				let listNumber = page == 1 || page == 0 ? i + 1 : ((page - 1) * perPage) + (i + 1)
 
-				let template = {'text': `${listNumber}`, 'callback_data':  `detailSuggestions-${r.id}`, 'hide': false}
+				let template = {'text': `${listNumber}`, 'callback_data':  `detailSuggestion-${r.media.id}|${r.mediaRecommendation.id}`, 'hide': false}
 				recommendationInfo += `${listNumber}. Rating: +${r.rating}\n`
 				recommendationInfo += `‣ ${r.media.title.romaji}\n`
 				recommendationInfo += `‣ ${r.mediaRecommendation.title.romaji}\n\n`

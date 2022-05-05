@@ -161,6 +161,14 @@ function suggestions(ctx, page=0) {
 	recommendations(ctx, title, variables, "suggestions")
 }
 
+function detailSuggestion(ctx, mediaId) {
+	mediaId = mediaId.split("|")
+
+	for (let id of mediaId) {
+		mediaDetail(ctx, { id: id }, 'ANIME')
+	}
+}
+
 function detailAnime(ctx, mediaId) {
 	let variables = {
 		id: mediaId
@@ -206,8 +214,9 @@ module.exports = {
 	top50Manga,
 	searchAnime,
 	searchManga,
-	detailAnime,
 	suggestions,
+	detailSuggestion,
+	detailAnime,
 	detailManga,
 	closeDesc,
 	readDesc,
