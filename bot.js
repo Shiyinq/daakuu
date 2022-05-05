@@ -17,6 +17,7 @@ const {
 	searchAnime,
 	searchManga,
 	suggestions,
+	detailSuggestion,
 	detailAnime,
 	detailManga,
 	closeDesc,
