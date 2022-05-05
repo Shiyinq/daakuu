@@ -1,4 +1,4 @@
-const api = require('./api')
+const api = require("./api")
 const query = require("../query/queryRecommendations")
 
 function recommendations(ctx, title, variables, paging) {
@@ -14,7 +14,7 @@ function recommendations(ctx, title, variables, paging) {
 				let number = i + 1 
 				let listNumber = page == 1 || page == 0 ? i + 1 : ((page - 1) * perPage) + (i + 1)
 
-				let template = {'text': `${listNumber}`, 'callback_data':  `detailSuggestion-${r.media.id}|${r.mediaRecommendation.id}`, 'hide': false}
+				let template = {"text": `${listNumber}`, "callback_data":  `detailSuggestion-${r.media.id}|${r.mediaRecommendation.id}`, "hide": false}
 				recommendationInfo += `${listNumber}. Rating: +${r.rating}\n`
 				recommendationInfo += `‣ ${r.media.title.romaji}\n`
 				recommendationInfo += `‣ ${r.mediaRecommendation.title.romaji}\n\n`
@@ -29,13 +29,13 @@ function recommendations(ctx, title, variables, paging) {
 			recommendationInfo += `\nPage: ${currentPage}`
 
 			if(currentPage != 1) {
-				buttonDetailInfo[2].push({'text': `⬅️ Prev Page ${currentPage - 1}`, 'callback_data': `${paging}-${currentPage - 1}`, 'hide': false})
+				buttonDetailInfo[2].push({"text": `⬅️ Prev Page ${currentPage - 1}`, "callback_data": `${paging}-${currentPage - 1}`, "hide": false})
 			}
 
-			buttonDetailInfo[2].push({'text': `🗒 Main Menu`, 'callback_data': `mainMenu`, 'hide': false})
+			buttonDetailInfo[2].push({"text": `🗒 Main Menu`, "callback_data": `mainMenu`, "hide": false})
 
 			if(hasNextPage) {
-				buttonDetailInfo[2].push({'text': `Next Page ${currentPage + 1} ➡️`, 'callback_data': `${paging}-${currentPage + 1}`, 'hide': false})
+				buttonDetailInfo[2].push({"text": `Next Page ${currentPage + 1} ➡️`, "callback_data": `${paging}-${currentPage + 1}`, "hide": false})
 			}
 
 			if(page == 0) {
@@ -54,7 +54,7 @@ function recommendations(ctx, title, variables, paging) {
 		})
 		.catch(err => {
 			console.error(err)
-			ctx.reply('Error when get data')
+			ctx.reply("Error when get data")
 		})
 }
 

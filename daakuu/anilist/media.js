@@ -1,7 +1,7 @@
-const api = require('./api')
+const api = require("./api")
 const query = require("../query/queryMedia")
-const { getMonthString } = require('../utils')
-const TurndownService = require('turndown')
+const { getMonthString } = require("../utils")
+const TurndownService = require("turndown")
 const  turndownService = new TurndownService()
 
 function media(ctx, title, variables, paging) {
@@ -20,8 +20,8 @@ function media(ctx, title, variables, paging) {
 				type = type.toLowerCase()
 				type = type.charAt(0).toUpperCase() + type.slice(1)
 
-				let template = {'text': `${listNumber}`, 'callback_data':  `detail${type}-${m.id}`, 'hide': false}
-				mediaInfo += `${listNumber}. ${m.title.romaji} ${m.meanScore ? '- Score: ' + m.meanScore + '%' : ''}\n`
+				let template = {"text": `${listNumber}`, "callback_data":  `detail${type}-${m.id}`, "hide": false}
+				mediaInfo += `${listNumber}. ${m.title.romaji} ${m.meanScore ? "- Score: " + m.meanScore + "%" : ""}\n`
 
 				if(number <= 5) {
 					buttonDetailInfo[0].push(template)
@@ -33,13 +33,13 @@ function media(ctx, title, variables, paging) {
 			mediaInfo += `\nPage: ${currentPage}`
 
 			if(currentPage != 1) {
-				buttonDetailInfo[2].push({'text': `⬅️ Prev Page ${currentPage - 1}`, 'callback_data': `${paging}-${currentPage - 1}-${search}`, 'hide': false})
+				buttonDetailInfo[2].push({"text": `⬅️ Prev Page ${currentPage - 1}`, "callback_data": `${paging}-${currentPage - 1}-${search}`, "hide": false})
 			}
 
-			buttonDetailInfo[2].push({'text': `🗒 Main Menu`, 'callback_data': `mainMenu`, 'hide': false})
+			buttonDetailInfo[2].push({"text": `🗒 Main Menu`, "callback_data": `mainMenu`, "hide": false})
 
 			if(hasNextPage) {
-				buttonDetailInfo[2].push({'text': `Next Page ${currentPage + 1} ➡️`, 'callback_data': `${paging}-${currentPage + 1}-${search}`, 'hide': false})
+				buttonDetailInfo[2].push({"text": `Next Page ${currentPage + 1} ➡️`, "callback_data": `${paging}-${currentPage + 1}-${search}`, "hide": false})
 			}
 
 			if(page == 0) {
@@ -58,7 +58,7 @@ function media(ctx, title, variables, paging) {
 		})
 		.catch(err => {
 			console.error(err)
-			ctx.reply('Error when get data')
+			ctx.reply("Error when get data")
 		})
 }
 
@@ -83,16 +83,16 @@ function mediaDetail(ctx, variables, type) {
 				siteUrl
 			}] = media
 
-			let detail = ''
+			let detail = ""
 			switch (type) {
-				case 'ANIME':
+				case "ANIME":
 					detail = `
-					📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : '-'}\nDuration: ${duration ? duration : '-'}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? ' '+day : ''}, ${year ? year : ''}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + '%' : '-'}\nStudios: ${nodes.length > 0 ? nodes.name : '-'}\nSource: ${source}\nGenres: ${genres.join(' ')} 
+					📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : "-"}\nDuration: ${duration ? duration : "-"}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? " "+day : ""}, ${year ? year : ""}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + "%" : "-"}\nStudios: ${nodes.length > 0 ? nodes.name : "-"}\nSource: ${source}\nGenres: ${genres.join(" ")} 
 					`
 					break;
-				case 'MANGA':
+				case "MANGA":
 					detail = `
-					📌 ${romaji}\n\nFormat: ${format}\nChapters: ${chapters}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? ' '+day : ''}, ${year ? year : ''}\nSource: ${source}\nGenres: ${genres.join(' ')} 
+					📌 ${romaji}\n\nFormat: ${format}\nChapters: ${chapters}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? " "+day : ""}, ${year ? year : ""}\nSource: ${source}\nGenres: ${genres.join(" ")} 
 					`
 					break;
 				default:
@@ -113,7 +113,7 @@ function mediaDetail(ctx, variables, type) {
 		})
 		.catch(err => {
 			console.log(err)
-			ctx.reply('Error when get Anime')
+			ctx.reply("Error when get Anime")
 		})
 }
 
@@ -127,7 +127,7 @@ function mediaDesc(ctx, variables) {
 			}] = media
 
 			ctx.reply(
-				romaji + '\n\n' + turndownService.turndown(description),
+				romaji + "\n\n" + turndownService.turndown(description),
 				{
 					"reply_markup":{
 						"inline_keyboard":[
@@ -139,7 +139,7 @@ function mediaDesc(ctx, variables) {
 		})
 		.catch(err => {
 			console.log(err)
-			ctx.reply('Error when get Description')
+			ctx.reply("Error when get Description")
 		})
 }
 
