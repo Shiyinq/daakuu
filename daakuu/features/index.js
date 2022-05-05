@@ -1,6 +1,6 @@
-const { getCurrentDate, getNextSeason, textMenu } = require('../utils')
-const { media, mediaDetail, mediaDesc } = require('../anilist/media')
-const { recommendations } = require('../anilist/recommendations')
+const { getCurrentDate, getNextSeason, textMenu } = require("../utils")
+const { media, mediaDetail, mediaDesc } = require("../anilist/media")
+const { recommendations } = require("../anilist/recommendations")
 
 function trendingAnime(ctx, page=0) {
 	let title =  `📎 ANIME - TRENDING NOW 📈\n\n`
@@ -165,7 +165,7 @@ function detailSuggestion(ctx, mediaId) {
 	mediaId = mediaId.split("|")
 
 	for (let id of mediaId) {
-		mediaDetail(ctx, { id: id }, 'ANIME')
+		mediaDetail(ctx, { id: id }, "ANIME")
 	}
 }
 
@@ -174,7 +174,7 @@ function detailAnime(ctx, mediaId) {
 		id: mediaId
 	}
 
-	mediaDetail(ctx, variables, 'ANIME')
+	mediaDetail(ctx, variables, "ANIME")
 }
 
 function detailManga(ctx, mediaId) {
@@ -182,7 +182,7 @@ function detailManga(ctx, mediaId) {
 		id: mediaId
 	}
 
-	mediaDetail(ctx, variables, 'MANGA')
+	mediaDetail(ctx, variables, "MANGA")
 }
 
 function closeDesc(ctx) {
