@@ -5,22 +5,22 @@ function getSeason(month) {
 		case 12:
 		case 1:
 		case 2:
-			season = 'WINTER'
+			season = "WINTER"
 			break
 		case 3:
 		case 4:
 		case 5:
-			season = 'SPRING'
+			season = "SPRING"
 			break
 		case 6:
 		case 7:
 		case 8:
-			season = 'SUMMER'
+			season = "SUMMER"
 			break
 		case 9:
 		case 10:
 		case 11:
-			season = 'FALL'
+			season = "FALL"
 			break
 		default:
 			break;
@@ -30,7 +30,7 @@ function getSeason(month) {
 }
 
 function getNextSeason(current, next) {
-	let season = ['WINTER', 'SPRING', 'SUMMER', 'FALL']
+	let season = ["WINTER", "SPRING", "SUMMER", "FALL"]
   	let currentIndex = season.indexOf(current)
   
 	if(next <= season.length) {
@@ -41,7 +41,7 @@ function getNextSeason(current, next) {
 		return season[total - 1]
    	}
 
-	let nextSeason = ''
+	let nextSeason = ""
   	let curentNext = next
   
   	for(let i = currentIndex + 1; i <= next; i++) {
@@ -60,13 +60,13 @@ function getNextSeason(current, next) {
 }
 
 function getMonthString(month) {
-	let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-	return month ? months[month] : '-'
+	let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+	return month ? months[month] : "-"
 }
 
 function getDays(date) {
-	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-	return date ? days[date] : '-'
+	let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+	return date ? days[date] : "-"
 }
 
 function getCurrentDate() {
@@ -90,9 +90,9 @@ function getCurrentDate() {
 }
 
 function getArgs(text) {
-	text = text.trim().split(' ')
+	text = text.trim().split(" ")
 	text.splice(0, 1)
-	text = text.join(' ')
+	text = text.join(" ")
 
 	return text
 }
@@ -104,7 +104,7 @@ function textMenu() {
 	🧭 Explore
 	/search_anime <title>
 	/search_manga <title>
-	/recommendations (soon)
+	/recommendations
 	/genres (soon)
 
 	📺 Anime
