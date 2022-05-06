@@ -94,7 +94,7 @@ function getArgs(text) {
 	text.splice(0, 1)
 	text = text.join(" ")
 
-	return text
+	return text.replace(/\s+/g, ' ')
 }
 
 function textMenu() {
