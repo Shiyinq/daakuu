@@ -128,27 +128,35 @@ function top50Manga(ctx, page=0) {
 }
 
 function searchAnime(ctx, page=0, search) {
-	let title = `🔍 Search Anime: ${search}\n\n`
-	let variables = {
-		"page": page,
-		"perPage": 10,
-		"type": "ANIME",
-		"sort": "SEARCH_MATCH",
-		"search": search
-	};
-	media(ctx, title, variables, "searchAnime")
+	if(search) {
+		let title = `🔍 Search Anime: ${search}\n\n`
+		let variables = {
+			"page": page,
+			"perPage": 10,
+			"type": "ANIME",
+			"sort": "SEARCH_MATCH",
+			"search": search
+		};
+		media(ctx, title, variables, "searchAnime")
+	}else {
+		ctx.reply("Please input the title after command\nexample: /search_anime steins gate")
+	}
 }
 
 function searchManga(ctx, page=0, search) {
-	let title = `🔍 Search Manga: ${search}\n\n`
-	let variables = {
-		"page": page,
-		"perPage": 10,
-		"type": "MANGA",
-		"sort": "SEARCH_MATCH",
-		"search": search
-	};
-	media(ctx, title, variables, "searchManga")
+	if(search){
+		let title = `🔍 Search Manga: ${search}\n\n`
+		let variables = {
+			"page": page,
+			"perPage": 10,
+			"type": "MANGA",
+			"sort": "SEARCH_MATCH",
+			"search": search
+		}
+		media(ctx, title, variables, "searchManga")
+	}else {
+		ctx.reply("Please input the title after command\nexample: /search_manga one piece")
+	}
 }
 
 function suggestions(ctx, page=0) {
