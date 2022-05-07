@@ -97,6 +97,17 @@ function getArgs(text) {
 	return text.replace(/\s+/g, ' ')
 }
 
+function toCapitalize(string) {
+    string = string.replace(/_/g, " ").split(" ")
+    let capitalize = []
+
+    for(let i = 0; i < string.length; i++) {
+        capitalize[i] = string[i][0].toUpperCase() + string[i].slice(1).toLowerCase()
+    }
+    
+	return capitalize.join(' ')
+}
+
 function textMenu() {
 	let menu = `
 	📍Welcome to DaAKu
@@ -144,5 +155,6 @@ module.exports = {
 	getNextSeason,
 	getMonthString,
 	getArgs,
+	toCapitalize,
 	textMenu
 }
