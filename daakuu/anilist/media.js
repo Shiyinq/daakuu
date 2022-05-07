@@ -87,7 +87,7 @@ function mediaDetail(ctx, variables, type) {
 			switch (type) {
 				case "ANIME":
 					detail = `
-					📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : "-"}\nDuration: ${duration ? duration : "-"}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? " "+day : ""}, ${year ? year : ""}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + "%" : "-"}\nStudios: ${nodes.length > 0 ? nodes.name : "-"}\nSource: ${source}\nGenres: ${genres.join(" ")} 
+					📌 ${romaji}\n\nFormat: ${format}\nEpisodes: ${episodes ? episodes : "-"}\nDuration: ${duration ? duration : "-"}\nStatus: ${status}\nRelease Date : ${getMonthString(month)}${day ? " "+day : ""}, ${year ? year : ""}\nSeason: ${season}\nMean Score: ${meanScore ? meanScore + "%" : "-"}\nStudios: ${nodes.length > 0 ? nodes[0].name : "-"}\nSource: ${source}\nGenres: ${genres.join(" ")} 
 					`
 					break;
 				case "MANGA":
