@@ -61,7 +61,7 @@ function getNextSeason(current, next) {
 
 function getMonthString(month) {
 	let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-	return month ? months[month] : "-"
+	return month ? months[month - 1] : "-"
 }
 
 function getDays(date) {
