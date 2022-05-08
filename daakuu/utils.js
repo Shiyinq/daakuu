@@ -61,7 +61,7 @@ function getNextSeason(current, next) {
 
 function getMonthString(month) {
 	let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-	return month ? months[month] : "-"
+	return month ? months[month - 1] : "-"
 }
 
 function getDays(date) {
@@ -95,6 +95,17 @@ function getArgs(text) {
 	text = text.join(" ")
 
 	return text.replace(/\s+/g, ' ')
+}
+
+function toCapitalize(string) {
+    string = string.replace(/_/g, " ").split(" ")
+    let capitalize = []
+
+    for(let i = 0; i < string.length; i++) {
+        capitalize[i] = string[i][0].toUpperCase() + string[i].slice(1).toLowerCase()
+    }
+    
+	return capitalize.join(' ')
 }
 
 function textMenu() {
@@ -144,5 +155,6 @@ module.exports = {
 	getNextSeason,
 	getMonthString,
 	getArgs,
+	toCapitalize,
 	textMenu
 }
