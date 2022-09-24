@@ -1,5 +1,5 @@
 module.exports = `
-query ($page: Int, $perPage: Int, $sort: [ReviewSort] = ID_DESC) {
+query ($id: Int, $page: Int, $perPage: Int, $sort: [ReviewSort] = ID_DESC) {
 	Page(page: $page, perPage: $perPage) {
 	  pageInfo {
 		total
@@ -8,7 +8,7 @@ query ($page: Int, $perPage: Int, $sort: [ReviewSort] = ID_DESC) {
 		lastPage
 		hasNextPage
 	  }
-	  reviews(sort: $sort) {
+	  reviews(id:$id, sort: $sort) {
 		id
 		rating
 		ratingAmount
