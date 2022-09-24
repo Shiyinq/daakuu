@@ -142,7 +142,7 @@ function textMenu() {
 
 	🌐 Other
 	/forum
-	/reviews (soon)
+	/reviews
 
 	🏠 DaAKuu
 	/menu
