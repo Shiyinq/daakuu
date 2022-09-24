@@ -92,7 +92,7 @@ function mediaDetail(ctx, variables, type) {
 					break;
 				case "MANGA":
 					detail = `
-					📌 ${romaji}\n\nFormat: ${toCapitalize(format)}\nChapters: ${chapters ? chapters : '-'}\nStatus: ${toCapitalize(status)}\nRelease Date : ${getMonthString(month)}${day ? " "+day : ""}, ${year ? year : ""}\nSource: ${toCapitalize(source)}\nGenres: ${genres.join(",")} 
+					📌 ${romaji}\n\nFormat: ${toCapitalize(format)}\nChapters: ${chapters ? chapters : "-"}\nStatus: ${toCapitalize(status)}\nRelease Date : ${getMonthString(month)}${day ? " "+day : ""}, ${year ? year : ""}\nSource: ${toCapitalize(source)}\nGenres: ${genres.join(",")} 
 					`
 					break;
 				default:
