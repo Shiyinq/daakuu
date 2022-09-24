@@ -17,6 +17,8 @@ const {
 	searchAnime,
 	searchManga,
 	suggestions,
+	reviewByUsers,
+	detailReviewByUser,
 	detailSuggestion,
 	detailAnime,
 	detailManga,
@@ -80,6 +82,10 @@ bot.command(["/search_manga", "/sm"], (ctx) => {
 
 bot.command(["/recommendations", "/rcm"], (ctx) => {
 	suggestions(ctx, 0, getArgs(ctx.message.text))
+})
+
+bot.command(["/reviews", "/rvs"], (ctx) => {
+	reviewByUsers(ctx, 0)
 })
 
 bot.command(["/forum"], (ctx) => {

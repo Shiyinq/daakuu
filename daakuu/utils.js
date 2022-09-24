@@ -94,10 +94,14 @@ function getArgs(text) {
 	text.splice(0, 1)
 	text = text.join(" ")
 
-	return text.replace(/\s+/g, ' ')
+	return text.replace(/\s+/g, " ")
 }
 
 function toCapitalize(string) {
+	if (string == null){
+		return "-"
+	}
+	
     string = string.replace(/_/g, " ").split(" ")
     let capitalize = []
 
@@ -105,7 +109,7 @@ function toCapitalize(string) {
         capitalize[i] = string[i][0].toUpperCase() + string[i].slice(1).toLowerCase()
     }
     
-	return capitalize.join(' ')
+	return capitalize.join(" ")
 }
 
 function textMenu() {
@@ -138,7 +142,7 @@ function textMenu() {
 
 	🌐 Other
 	/forum
-	/reviews (soon)
+	/reviews
 
 	🏠 DaAKuu
 	/menu
