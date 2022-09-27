@@ -10,6 +10,8 @@
 
 DaAKuu Bot (Daftar Anime Kuu) Unofficial anilist.co bot
 
+<img width="399" alt="image" src="daakuu.png">
+
 ## Running on your local machine
 - ```git clone https://github.com/Shiyinq/daakuu.git```
 - ```cd daakuu```
