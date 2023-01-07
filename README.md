@@ -1,4 +1,4 @@
-# DaAKuu
+# DaAKuu 
 [![CodeFactor](https://www.codefactor.io/repository/github/shiyinq/daakuu/badge)](https://www.codefactor.io/repository/github/shiyinq/daakuu)
 ![Lines of code](https://img.shields.io/tokei/lines/github/Shiyinq/daakuu)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Shiyinq/daakuu)
@@ -10,17 +10,14 @@
 
 DaAKuu Bot (Daftar Anime Kuu) Unofficial anilist.co bot
 
+[![Bot](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/DaAKuuBot)
+
+
 <img width="399" alt="image" src="daakuu.png">
 
-## Running on your local machine
+## Setup
 - ```git clone https://github.com/Shiyinq/daakuu.git```
 - ```cd daakuu```
 - ```npm install```
 - rename ```.env.example``` to ```.env``` and edit ```.env``` with your own bot token
 - ```npm run dev```
-
-## Running on production
-- change ```npm run dev``` and recomended using [pm2](https://pm2.keymetrics.io/)
-
-## Try this bot
-[![Bot](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/DaAKuuBot)
