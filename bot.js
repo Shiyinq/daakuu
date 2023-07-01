@@ -86,7 +86,7 @@ bot.command(["/about"], (ctx) => {
 	ctx.replyWithMarkdown("DaAkuu (Daftar Anime Kuu) is unofficial anilis.co bot.\n\nYou can visit our repository on GitHub to contribute or submit issue.",{ 
 		disable_web_page_preview: true,
 		"reply_markup":{
-			"inline_keyboard": [[{"text":"Open GitHub", "url": "https://github.com/Shiyinq/src"}]]
+			"inline_keyboard": [[{"text":"Open GitHub", "url": "https://github.com/Shiyinq/daakuu"}]]
 		}
 	})
 })
