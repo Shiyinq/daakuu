@@ -22,7 +22,7 @@ DaAKuu (Daftar Anime Kuu) is an unofficial bot for [anilist.co](https://anilist.
 - nodemon lates
 
 ## Development
-Clone and install dependencies
+Clone and install dependencies.
 
 **1. Clone this repository**
 ```
