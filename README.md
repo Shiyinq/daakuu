@@ -4,9 +4,10 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/Shiyinq/daakuu)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Shiyinq/daakuu)
 
-DaAKuu (Daftar Anime Kuu) is an unofficial bot for [anilist.co](https://anilist.co) bot.
+| ![Home](docs/images/daakuu_1.png) | ![Trending](docs/images/daakuu_2.png) | ![Detail](docs/images/daakuu_3.png) | ![Review](docs/images/daakuu_4.png) |
+|:---:|:---:|:---:|:---:|
 
-<img width="399" alt="image" src="daakuu.png">
+DaAKuu (Daftar Anime Kuu) is an unofficial bot for [anilist.co](https://anilist.co) bot.
 
 ## Table of Contents
 - [DaAKuu](#daakuu)
